@@ -7,30 +7,37 @@ router.post('/useurl', function(req, res, next) {
         const {url} = req.body;
         console.log('url', url);
         try {
+            const page = await browser.newPage();
+            await page.goto(url);
+            const data = await page.evaluate(() => {
+                const ingredients = document.querySelectorAll('.mntl-structured-ingredients__list li');
+                const ingredientsArray = [];
+                // Enter JavaScript to run on the page here!
+                for(i=0; i<ingredients.length; i++) {
+                    ingredientsArray.push({
+                        quantity: ingredients[i].querySelector('[data-ingredient-quantity]').innerText,
+                        unit: ingredients[i].querySelector('[data-ingredient-unit]').innerText, 
+                        name: ingredients[i].querySelector('[data-ingredient-name]').innerText
+                    })
+                }
 
+                //Get steps
+                const steps = document.querySelectorAll('.recipe__steps-content ol li p');
+                const stepsArray = [];
+                for(i=0; i<steps.length; i++) {
+                    stepsArray.push(steps[i].innerText);
+                }
+                console.log()
+                return {steps: stepsArray, ingredients: ingredientsArray};
+                //return ingredientsArray;
+            })
+            await browser.close();
+            console.log('data: ', data);
+            res.json({data})
         } catch(error) {
-            console.log('error: ', error);
-            res.send('error');
+            res.status(400).json({error});
         }
-        const page = await browser.newPage();
-        await page.goto(url);
         // await page.goto(url);
-        const data = await page.evaluate(() => {
-            const ingredients = document.querySelectorAll('.mntl-structured-ingredients__list li');
-            const array = [];
-            // Enter JavaScript to run on the page here!
-            for(i=0; i<ingredients.length; i++) {
-                array.push({
-                    quantity: ingredients[i].querySelector('[data-ingredient-quantity]').innerText,
-                    unit: ingredients[i].querySelector('[data-ingredient-unit]').innerText, 
-                    name: ingredients[i].querySelector('[data-ingredient-name]').innerText
-                })
-            }
-            return array;
-        })
-        await browser.close();
-        console.log('data: ', data);
-        res.json({data})
     })
   //const browser = await puppeteer.launch( { headless: false } )
 
