@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const recipeController = require('./controller/recipe.controller');
+const recipeController = require('./database/controller/recipe.controller');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

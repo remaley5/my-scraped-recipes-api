@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
-const recipeController = require('../controller/recipe.controller')
+const recipeController = require('../database/controller/recipe.controller')
 
 router.use(bodyParser.json());
 
