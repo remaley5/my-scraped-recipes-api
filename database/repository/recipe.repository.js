@@ -9,9 +9,9 @@ class RecipeRepository {
     constructor() {
         this.db = connect();
         //For Developement: This clears the database on restart
-        this.db.sequelize.sync({ force: true }).then(() => {
-            console.log("Drop and re-sync db.");
-        });
+        this.db.sequelize.sync({ force: false }); //.then(() => {
+        //     console.log("Drop and re-sync db.");
+        // });
     }
 
     async getRecipes() {
