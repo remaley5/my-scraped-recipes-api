@@ -10,9 +10,9 @@ class UserRepository {
     constructor() {
         this.db = connect();
         //For Developement: This clears the database on restart
-        //this.db.sequelize.sync({ force: false }); //.then(() => {
-        //     console.log("Drop and re-sync db.");
-        // });
+    //     this.db.sequelize.sync({ force: true }).then(() => {
+    //         console.log("Drop and re-sync db.");
+    //    });
     }
 
     async getUsers() {
@@ -23,27 +23,28 @@ class UserRepository {
             return users;
         } catch (err) {
             console.log(err);
-            return [];
+            res.send("Could not get users");
         }
     }
 
-    async saveUser(user) {
+    async createUser(user) {
         let data = {};
+        console.log('Creating user.... db.users:', this.db.users);
         try {
-            const username = await this.db.users.findOne({
+            const userName = await this.db.users.findOne({
                 where: {
-                    userName: req.body.userName,
+                    userName: user.userName,
                 },
             });
             //if username exist in the database respond with a status of 409
-            if (username) {
+            if (userName) {
                 return res.json(409).send("username already taken");
             }
 
             //checking if email already exist
-            const emailcheck = await this.users.findOne({
+            const emailcheck = await this.db.users.findOne({
                 where: {
-                    email: req.body.email,
+                    email: user.email,
                 },
             });
 
@@ -51,12 +52,12 @@ class UserRepository {
             if (emailcheck) {
                 return res.json(409).send("Authentication failed");
             }
-            console.log('User: ', user);
+            console.log('Creating user: ', user);
             data = await this.db.users.create(user);
         } catch (error) {
             console.log(error);
         }
-        console.log('creating user...', data);
+        console.log('created user...', data);
         return data;
     }
 

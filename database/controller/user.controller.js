@@ -1,16 +1,16 @@
-const UserService = require('../service/user.service');
+const userService = require('../service/user.service');
 const logger = require('../logger/api.logger');
 
 class userController {
 
-    async saveUser(user) {
+    async createUser(user) {
         logger.info('Controller: saveUser');
-        return await UserService.saveUser(user);
+        return await userService.createUser(user);
     }
 
     async getUsers() {
         logger.info('Controller: getUsers')
-        return await UserService.getUsers();
+        return await userService.getUsers();
     }
 }
 

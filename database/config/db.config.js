@@ -26,8 +26,10 @@ const connect = () => {
     db.sequelize = sequelize;
     // Edit 
     db.recipes = require("../model/recipe.model.js")(sequelize, DataTypes, Model);
+    db.users = require("../model/user.model.js")(sequelize, DataTypes, Model);
 
     return db;
+
 }
 
 module.exports = {

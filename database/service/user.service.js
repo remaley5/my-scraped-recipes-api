@@ -5,8 +5,8 @@ class UserService {
 
     constructor() {}
 
-    async saveUser(user) {
-        return await userRepository.saveUser(user);
+    async createUser(user) {
+        return await userRepository.createUser(user);
     }
 
     async getUsers() {

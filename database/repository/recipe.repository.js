@@ -8,14 +8,14 @@ class RecipeRepository {
 
     constructor() {
         this.db = connect();
-        //For Developement: This clears the database on restart
+        // For Developement: This clears the database on restart
         this.db.sequelize.sync({ force: true }).then(() => {
-            console.log("Drop and re-sync db.");
+             console.log("Drop and re-sync db.");
         });
     }
 
     async getRecipes() {
-        
+        console.log('recipes db: ', this.db);
         try {
             const recipes = await this.db.recipes.findAll();
             console.log('recipes:::', recipes);
@@ -27,7 +27,6 @@ class RecipeRepository {
     }
 
     async createRecipe(recipe) {
-        console.log('Create Recipe: ', recipe);
         let data = {};
         try {
             recipe.createdate = new Date().toISOString();
