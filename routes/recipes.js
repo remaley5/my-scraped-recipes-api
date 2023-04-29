@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const bodyParser = require('body-parser');
 const recipeController = require('../database/controller/recipe.controller')
 
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
+    console.log('Recipe route: ', req.body);
     recipeController.createRecipe(req.body.recipe).then(data => res.json(data));
 });
 

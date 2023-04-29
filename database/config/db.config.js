@@ -29,7 +29,6 @@ const connect = () => {
     db.users = require("../model/user.model.js")(sequelize, DataTypes, Model);
 
     return db;
-
 }
 
 module.exports = {

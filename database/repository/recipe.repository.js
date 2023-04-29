@@ -27,6 +27,7 @@ class RecipeRepository {
     }
 
     async createRecipe(recipe) {
+        console.log('Create Recipe: ', recipe);
         let data = {};
         try {
             recipe.createdate = new Date().toISOString();
