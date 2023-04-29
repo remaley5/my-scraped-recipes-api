@@ -1,8 +1,7 @@
 const recipeService  = require('../service/recipe.service');
 const logger = require('../logger/api.logger');
 
-// edit - controller
-class TodoController {
+class RecipeController {
 
     async getRecipes() {
         logger.info('Controller: getRecipes')
@@ -24,4 +23,4 @@ class TodoController {
         return await recipeService.deleteRecipe(recipeId);
     }
 }
-module.exports = new TodoController();
+module.exports = new RecipeController();
