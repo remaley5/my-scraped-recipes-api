@@ -3,14 +3,20 @@ var router = express.Router();
 var userController = require('../database/controller/user.controller');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/all', function(req, res, next) {
   console.log('Getting users');
   userController.getUsers().then(data => res.json(data));
 });
 
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
   console.log("Posting User: ", req.body);
-  userController.createUser(req.body.user).then(data => res.json(data));
+  console.log('SIGNUP ROUTES: ', req.body.user);
+  userController.createUser(res, req.body.user).then(data => data);
+});
+
+router.post('/login', (req, res) => {
+  console.log("Logging in User :", req.body);
+  userController.loginUser(res, req.body.user).then(data => data);
 });
 
 

@@ -5,12 +5,17 @@ class UserService {
 
     constructor() {}
 
-    async createUser(user) {
-        return await userRepository.createUser(user);
+    async createUser(res, user) {
+        console.log('CREATE USER: ', user);
+        return await userRepository.createUser(res, user);
     }
 
     async getUsers() {
         return await userRepository.getUsers();
+    }
+
+    async loginUser(res, user) {
+        return await userRepository.loginUser(res, user)
     }
 }
 
