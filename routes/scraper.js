@@ -11,6 +11,7 @@ router.post('/useurl', function(req, res, next) {
             await page.goto(url);
             const data = await page.evaluate(() => {
                 const ingredients = document.querySelectorAll('.mntl-structured-ingredients__list li');
+
                 const ingredientsArray = [];
                 // Enter JavaScript to run on the page here!
                 for(i=0; i<ingredients.length; i++) {
@@ -18,7 +19,7 @@ router.post('/useurl', function(req, res, next) {
                         quantity: ingredients[i].querySelector('[data-ingredient-quantity]').innerText,
                         unit: ingredients[i].querySelector('[data-ingredient-unit]').innerText, 
                         name: ingredients[i].querySelector('[data-ingredient-name]').innerText
-                    })
+                    });
                 }
 
                 //Get steps
