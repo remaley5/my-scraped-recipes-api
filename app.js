@@ -8,7 +8,7 @@ var cors = require("cors");
 // require("dotenv").config();
 // const recipeController = require("./database/controller/recipe.controller");
 
-var scraper = require("./services/scraper.service");
+var scraper = require("./database/services/scraper.service");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var recipesRouter = require("./routes/recipes");

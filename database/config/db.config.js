@@ -7,6 +7,7 @@ const connect = () => {
     const password = process.env.PASSWORD;
     const database = process.env.DB;
     const dialect = process.env.DIALECT;
+    console.log(dialect);
 
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,

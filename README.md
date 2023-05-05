@@ -1,3 +1,8 @@
+Model constructs the tables for the db.
+Repository interacts with the db using Sequelize & organizes data for the Route.
+Services connect to 3rd parties.
+Controller is where repository and service layers meet.
+
 Tutorials:
 [medium postgresql jwt react](https://medium.com/@rachealkuranchie/node-js-authentication-with-postgresql-sequelize-and-express-js-20ae773da4c9)
 [GitHub bezkoder node js jwt authentication postgresql](https://github.com/bezkoder/node-js-jwt-authentication-postgresql)
