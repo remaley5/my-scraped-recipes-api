@@ -1,24 +1,23 @@
-const { connect } = require('../config/db.config');
-const logger = require('../logger/api.logger');
+const { connect } = require("../config/db.config");
+const logger = require("../logger/api.logger");
 
 // Edit
 class RecipeRepository {
-
     db = {};
-
+    // ** Move constructor to model
     constructor() {
         this.db = connect();
         // For Developement: This clears the database on restart
         this.db.sequelize.sync({ force: true }).then(() => {
-             console.log("Drop and re-sync db.");
+            console.log("Drop and re-sync db.");
         });
     }
 
     async getRecipes() {
-        console.log('recipes db: ', this.db);
+        console.log("recipes db: ", this.db);
         try {
             const recipes = await this.db.recipes.findAll();
-            console.log('recipes:::', recipes);
+            console.log("recipes:::", recipes);
             return recipes;
         } catch (err) {
             console.log(err);
@@ -31,8 +30,8 @@ class RecipeRepository {
         try {
             recipe.createdate = new Date().toISOString();
             data = await this.db.recipes.create(recipe);
-        } catch(err) {
-            logger.error('Error::' + err);
+        } catch (err) {
+            logger.error("Error::" + err);
         }
         return data;
     }
@@ -41,13 +40,16 @@ class RecipeRepository {
         let data = {};
         try {
             recipe.updateddate = new Date().toISOString();
-            data = await this.db.recipes.update({...recipes}, {
-                where: {
-                    id: recipe.id
+            data = await this.db.recipes.update(
+                { ...recipes },
+                {
+                    where: {
+                        id: recipe.id,
+                    },
                 }
-            });
-        } catch(err) {
-            logger.error('Error::' + err);
+            );
+        } catch (err) {
+            logger.error("Error::" + err);
         }
         return data;
     }
@@ -57,16 +59,15 @@ class RecipeRepository {
         try {
             data = await this.db.recipes.destroy({
                 where: {
-                    id: recipeId
-                }
+                    id: recipeId,
+                },
             });
-        } catch(err) {
-            logger.error('Error::' + err);
+        } catch (err) {
+            logger.error("Error::" + err);
         }
         return data;
-        return {status: `${data.deletedCount > 0 ? true : false}`};
+        return { status: `${data.deletedCount > 0 ? true : false}` };
     }
-
 }
 
 module.exports = new RecipeRepository();
