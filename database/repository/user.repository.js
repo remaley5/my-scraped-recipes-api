@@ -1,17 +1,15 @@
 //importing modules
-const { connect } = require('../config/db.config');
+const { connect } = require("../config/db.config");
 
 // Added
 //------------------------------------------------------------------
-const logger = require('../logger/api.logger');
+const logger = require("../logger/api.logger");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 //------------------------------------------------------------------
 
-
 // Edit
 class UserRepository {
-
     db = {};
 
     constructor() {
@@ -23,10 +21,9 @@ class UserRepository {
     }
 
     async getUsers() {
-
         try {
             const users = await this.db.users.findAll();
-            console.log('usrs:::', users);
+            console.log("usrs:::", users);
             return users;
         } catch (err) {
             console.log(err);
@@ -35,10 +32,10 @@ class UserRepository {
     }
 
     async createUser(res, user) {
-        console.log('CREATEUSER REPOSITORY: ', user);
+        console.log("CREATEUSER REPOSITORY: ", user);
         try {
             const data = {
-                userName: user.userName,
+                username: user.username,
                 email: user.email,
                 password: await bcrypt.hash(user.password, 10),
             };
@@ -49,11 +46,18 @@ class UserRepository {
             //generate token with the user's id and the secretKey in the env file
             // set cookie with the token generated
             if (newUser) {
-                let token = jwt.sign({ id: newUser.id }, process.env.SECRETKEY, {
-                    expiresIn: 1 * 24 * 60 * 60 * 1000,
-                });
+                let token = jwt.sign(
+                    { id: newUser.id },
+                    process.env.SECRETKEY,
+                    {
+                        expiresIn: 1 * 24 * 60 * 60 * 1000,
+                    }
+                );
 
-                res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+                res.cookie("jwt", token, {
+                    maxAge: 1 * 24 * 60 * 60,
+                    httpOnly: true,
+                });
                 //console.log("user", JSON.stringify(newUser, null, 2));
                 //console.log(token);
                 //send users details
@@ -64,37 +68,44 @@ class UserRepository {
                 return res.status(409).send("Details are not correct");
             }
         } catch (error) {
-
             console.log("ERROR", error);
         }
-    };
-
+    }
 
     async loginUser(res, user) {
         try {
-
             //find a user by their email
             const foundUser = await this.db.users.findOne({
                 where: {
-                    email: user.email
-                }
+                    email: user.email,
+                },
             });
 
             //if user email is found, compare password with bcrypt
             if (foundUser) {
-                const isSame = await bcrypt.compare(user.password, foundUser.password);
+                const isSame = await bcrypt.compare(
+                    user.password,
+                    foundUser.password
+                );
 
                 //if password is the same
                 //generate token with the user's id and the secretKey in the env file
 
                 if (isSame) {
-                    let token = jwt.sign({ id: user.id }, process.env.SECRETKEY, {
-                        expiresIn: 1 * 24 * 60 * 60 * 1000,
-                    });
+                    let token = jwt.sign(
+                        { id: user.id },
+                        process.env.SECRETKEY,
+                        {
+                            expiresIn: 1 * 24 * 60 * 60 * 1000,
+                        }
+                    );
 
                     //if password matches wit the one in the database
                     //go ahead and generate a cookie for the user
-                    res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+                    res.cookie("jwt", token, {
+                        maxAge: 1 * 24 * 60 * 60,
+                        httpOnly: true,
+                    });
                     console.log("user", JSON.stringify(foundUser, null, 2));
                     console.log(token);
                     console.log("SENDING 201");
@@ -111,9 +122,7 @@ class UserRepository {
         } catch (error) {
             console.log(error);
         }
-    };
-
-
+    }
 }
 
 module.exports = new UserRepository();
