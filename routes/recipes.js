@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     recipeController.getRecipes().then(data => res.json(data));
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
     console.log(req.body);
     recipeController.createRecipe(req.body.recipe).then(data => res.json(data));
 });

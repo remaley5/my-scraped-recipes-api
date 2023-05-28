@@ -1,30 +1,28 @@
-// edit
 
 module.exports = (sequelize, DataTypes, Model) => {
 
-    class Recipes extends Model {}
+    class Ingredients extends Model {}
 
-    Recipes.init({
+    Ingredients.init({
         // Model attributes are defined here
-        title: {
+        quantity: {
           type: DataTypes.STRING,
-          allowNull: false
         },
-        url: {
+        name : {
           type: DataTypes.STRING 
           // allowNull defaults to true
         }, 
-        ingredients: {
+        unit: {
           type: DataTypes.STRING
         }, 
-        steps: {
+        recipe_id: {
           type: DataTypes.STRING
         }
       }, {
         // Other model options go here
         sequelize, // We need to pass the connection instance
-        modelName: 'recipes' // We need to choose the model name
+        modelName: 'ingredients' // We need to choose the model name
       });
       
-      return Recipes;
+      return Ingredients;
 }
