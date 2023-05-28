@@ -5,9 +5,9 @@ const recipeController = require('../database/controller/recipe.controller')
 
 router.use(bodyParser.json());
 
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
     //res.send('respond with a resource');
-    recipeController.getRecipes().then(data => res.json(data));
+    recipeController.getRecipes(id).then(data => res.json(data));
 });
 
 router.post('/:id', (req, res) => {

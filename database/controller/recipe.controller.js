@@ -3,9 +3,9 @@ const logger = require('../logger/api.logger');
 
 class RecipeController {
 
-    async getRecipes() {
+    async getRecipes(id) {
         logger.info('Controller: getRecipes')
-        return await recipeService.getRecipes();
+        return await recipeService.getRecipes(id);
     }
 
     async createRecipe(recipe) {
