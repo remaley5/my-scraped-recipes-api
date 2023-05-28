@@ -14,10 +14,13 @@ class RecipeRepository {
         });
     }
 
-    async getRecipes() {
+    async getRecipes(id) {
         console.log('recipes db: ', this.db);
         try {
-            const recipes = await this.db.recipes.findAll();
+            const recipes = await this.db.recipes.findAll({
+                where: {
+                    user_id: id
+            }});
             console.log('recipes:::', recipes);
             return recipes;
         } catch (err) {
