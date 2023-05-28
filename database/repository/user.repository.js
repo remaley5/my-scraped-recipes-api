@@ -38,7 +38,7 @@ class UserRepository {
         console.log('CREATEUSER REPOSITORY: ', user);
         try {
             const data = {
-                userName: user.userName,
+                username: user.username,
                 email: user.email,
                 password: await bcrypt.hash(user.password, 10),
             };
