@@ -19,9 +19,6 @@ module.exports = (sequelize, DataTypes, Model) => {
         }, 
         steps: {
           type: DataTypes.STRING
-        }, 
-        user_id: {
-          
         }
       }, {
         // Other model options go here
