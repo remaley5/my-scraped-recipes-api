@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes, Model) => {
           type: DataTypes.STRING
         }, 
         user_id: {
-          
+          type: DataTypes.INTEGER
         }
       }, {
         // Other model options go here

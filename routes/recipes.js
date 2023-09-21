@@ -7,10 +7,11 @@ router.use(bodyParser.json());
 
 router.get("/:id", (req, res) => {
     //res.send('respond with a resource');
-    recipeController.getRecipes(id).then((data) => res.json(data));
+    console.log('id::::', req.params.id);
+    recipeController.getRecipes(req.params.id).then((data) => res.json(data));
 });
 
-router.post("/:id", (req, res) => {
+router.post("/create", (req, res) => {
     console.log(req.body);
     recipeController
         .createRecipe(req.body.recipe)

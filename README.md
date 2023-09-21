@@ -8,7 +8,7 @@ Tutorials:
 [GitHub bezkoder node js jwt authentication postgresql](https://github.com/bezkoder/node-js-jwt-authentication-postgresql)
 [NodeJS REST API with Express and PostgreSQL](https://medium.com/bb-tutorials-and-thoughts/how-to-build-nodejs-rest-api-with-express-and-postgresql-674d96d5cb8f)
 
-## Testing:
+## Testing Routes:
 
 Start Server:
 
@@ -18,20 +18,46 @@ npm run start
 
 Go to Postman:
 
-```
-http://localhost:3030/recipes/
-```
+### User 
 
-POST:
+#### Sign up
+route: POST: http://localhost:9000/users/signup
 
-```
-[
-    {
-        "id": 1,
-        "title": "test",
-        "url": "test",
-        "createdAt": "2023-04-06T03:56:16.424Z",
-        "updatedAt": "2023-04-06T03:56:16.424Z"
+```json 
+{
+    "user": {
+        "email": "test@test.com",
+        "password" : "password",
+        "username": "test"
     }
-]
+}
+```
+
+#### Log in
+route: POST: http://localhost:9000/users/login
+
+```json 
+{
+    "user": {
+        "email": "test@test.com",
+        "password" : "password",
+    }
+}
+```
+
+
+
+### Recipes
+#### Create Recipe
+route: POST: http://localhost:900/recipes/create
+```json
+{
+    "user": {
+        "title": "testing recipe", 
+        "url": "test@test.com", 
+        "ingredients" : "test ingredients",
+        "steps": "test steps",
+        "user_id": "1"
+    }
+}
 ```

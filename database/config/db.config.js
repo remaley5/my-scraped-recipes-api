@@ -27,6 +27,10 @@ const connect = () => {
     // Edit 
     db.recipes = require("../model/recipe.model.js")(sequelize, DataTypes, Model);
     db.users = require("../model/user.model.js")(sequelize, DataTypes, Model);
+    db.ingredients = require("../model/ingredients.model")(sequelize, DataTypes, Model);
+
+    // db.recipes.hasMany(db.ingredients);
+    // db.ingredients.hasOne(db.recipes);
 
     return db;
 

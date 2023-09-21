@@ -23,7 +23,6 @@ class UserRepository {
     }
 
     async getUsers() {
-
         try {
             const users = await this.db.users.findAll();
             console.log('usrs:::', users);

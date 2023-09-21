@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes, Model) => {
     Steps.init({
         // Model attributes are defined here
         number: {
-
+          type: DataTypes.STRING,
         }, 
         text: {
           type: DataTypes.STRING,
-        }
+        },
         recipe_id: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
         }
       }, {
         // Other model options go here

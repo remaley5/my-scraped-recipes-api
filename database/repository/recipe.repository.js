@@ -8,10 +8,10 @@ class RecipeRepository {
 
     constructor() {
         this.db = connect();
-        // For Developement: This clears the database on restart
-        this.db.sequelize.sync({ force: true }).then(() => {
-             console.log("Drop and re-sync db.");
-        });
+//        For Developement: This clears the database on restart
+        // this.db.sequelize.sync({ force: true }).then(() => {
+        //      console.log("Drop and re-sync db.");
+        // });
     }
 
     async getRecipes(id) {
@@ -28,6 +28,20 @@ class RecipeRepository {
             return [];
         }
     }
+
+    // async getRecipe(id) {
+    //     try {
+    //         const  = await this.db.recipes.findAll({
+    //             where: {
+    //                 user_id: id
+    //         }});
+    //         console.log('recipes:::', recipes);
+    //         return recipes;
+    //     } catch (err) {
+    //         console.log(err);
+    //         return [];
+    //     }
+    // }
 
     async createRecipe(recipe) {
         let data = {};
