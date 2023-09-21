@@ -52,7 +52,22 @@ route: POST: http://localhost:9000/users/login
 route: POST: http://localhost:900/recipes/create
 ```json
 {
-    "user": {
+    "recipe": {
+        "title": "testing recipe", 
+        "url": "test@test.com", 
+        "ingredients" : "test ingredients",
+        "steps": "test steps",
+        "user_id": "1"
+    }
+}
+```
+
+
+#### Get Recipe For User
+route: GET: http://localhost:900/recipes/create
+```json
+{
+    "recipe": {
         "title": "testing recipe", 
         "url": "test@test.com", 
         "ingredients" : "test ingredients",
